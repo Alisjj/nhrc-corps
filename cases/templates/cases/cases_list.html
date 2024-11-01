@@ -1,0 +1,98 @@
+{% extends '_base.html' %} {% load crispy_forms_tags %} {% block title %}Staff
+Home{% endblock title %} {% block content %}
+<main class="container mx-auto py-8">
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Cases Management</h2>
+                <div class="flex space-x-4">
+                    <form method="get" action="{% url 'cases:cases_list' %}">
+                        <select name="status" class="border border-indigo-300 rounded px-3 py-2" onchange="this.form.submit()">
+                            <option value="">All Status</option>
+                            <option value="Active">Active</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Resolved">Resolved</option>
+                        </select>
+                    </form>
+                    <a href="{% url 'cases:add_case' %}" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 flex items-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                        </svg>
+                        New Case
+                    </a>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full bg-white">
+                    <thead>
+                        <tr class="bg-indigo-50 text-indigo-800">
+                            <th class="px-4 py-3 text-left">Case Code</th>
+                            <th class="px-4 py-3 text-left">Full Name</th>
+                            <th class="px-4 py-3 text-left">Phone Number</th>
+                            <th class="px-4 py-3 text-left">State</th>
+                            <th class="px-4 py-3 text-left">Case Type</th>
+                            <th class="px-4 py-3 text-left">Date Filed</th>
+                            <th class="px-4 py-3 text-left">Status</th>
+                            <th class="px-4 py-3 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for case in cases %}
+                        <tr class="border-b hover:bg-indigo-50 transition-colors">
+                            <td class="px-4 py-3">{{ case.code }}</td>
+                            <td class="px-4 py-3">{{ case.fullname }}</td>
+                            <td class="px-4 py-3">{{ case.phonenumber }}</td>
+                            <td class="px-4 py-3">{{ case.state }}</td>
+                            <td class="px-4 py-3">{{ case.case_type }}</td>
+                            <td class="px-4 py-3">{{ case.created_at|date:"Y-m-d" }}</td>
+                            <td class="px-4 py-3">
+                                <span class="px-2 py-1 rounded-full text-xs {% if case.status == 1 %}bg-green-100 text-green-700{% elif case.status == 2 %}bg-yellow-100 text-yellow-700{% else %}bg-gray-100 text-gray-700{% endif %}">
+                                    {{ case.get_status_display }}
+                                </span>
+                            </td>
+                            <td class="px-4 py-3 text-center">
+                                <div class="flex justify-center space-x-2">
+                                    <a href="#" class="text-indigo-600 hover:text-indigo-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                        </svg>
+                                    </a>
+                                    <a href="{% url 'cases:edit_case' case.id %}" class="text-green-600 hover:text-green-800">
+                                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="8" class="text-center py-4 text-gray-500">No cases found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+
+            <div class="flex justify-between items-center mt-6">
+                <p class="text-gray-600">Showing {{ cases.paginator.count }} cases</p>
+                <div class="flex space-x-2">
+                    {% if cases.has_previous %}
+                        <a href="?page={{ cases.previous_page_number }}" class="bg-indigo-100 text-indigo-600 px-3 py-2 rounded hover:bg-indigo-200">Previous</a>
+                    {% endif %}
+                    {% if cases.has_next %}
+                        <a href="?page={{ cases.next_page_number }}" class="bg-indigo-600 text-white px-3 py-2 rounded hover:bg-indigo-700">Next</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+<footer class="bg-gray-200 mt-8">
+    <div class="container mx-auto py-4 text-center text-gray-600">
+        © 2024 National Human Rights Commission of Nigeria. All rights reserved.
+    </div>
+</footer>
+{% endblock content %}
