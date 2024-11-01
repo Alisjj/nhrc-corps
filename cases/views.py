@@ -2,7 +2,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView
 from .models import Case
 from .forms import CaseForm, CaseEditForm
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.core.paginator import Paginator
 from .models import Case
@@ -26,11 +26,11 @@ class HomePageView(View):
         
         return render(request, self.template_name, context)
 
-class CaseCreateView(CreateView, LoginRequiredMixin):
+class CaseCreateView(CreateView):
     model = Case
     form_class = CaseForm
     template_name = 'cases/case_form.html'
-    success_url = reverse_lazy('cases:cases_list')  
+    success_url = reverse_lazy('cases:track_case')  
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -52,3 +52,15 @@ def cases_list(request):
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
     return render(request, 'cases/cases_list.html', {'cases': page_obj})
+
+
+def track_case(request):
+    case_data = None
+    if request.method == 'POST':
+        case_ref = request.POST.get('case_ref')
+        try:
+            case_data = get_object_or_404(Case, code=case_ref)
+        except:
+            case_data = None 
+
+    return render(request, 'cases/track_case.html', {'case_data': case_data})
