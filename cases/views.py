@@ -14,9 +14,9 @@ class HomePageView(View):
     template_name = 'home.html'
 
     def get(self, request):
-        active_cases = Case.objects.filter(status=1).count()
-        pending_cases = Case.objects.filter(status=2).count()
-        resolved_cases = Case.objects.filter(status=3).count()
+        active_cases = Case.objects.filter(status="Review").count()
+        pending_cases = Case.objects.filter(status="Investigation").count()
+        resolved_cases = Case.objects.filter(status="Resolution").count()
         
         context = {
             'active_cases': active_cases,

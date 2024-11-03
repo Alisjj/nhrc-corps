@@ -7,7 +7,7 @@ class CaseForm(forms.ModelForm):
         fields = [
             'fullname', 'phonenumber', 'address', 'sex', 'email', 
             'occupation', 'state', 'evidence', 'case_type', 
-            'description', 'code'
+            'description'
         ]
 
 

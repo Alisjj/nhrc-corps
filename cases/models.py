@@ -1,3 +1,4 @@
+import uuid
 from django.db import models
 from django.utils import timezone
 
@@ -40,4 +41,6 @@ class Case(models.Model):
             self.investigation_start_date = timezone.now()
         elif self.status == 'Resolution' and not self.resolution_date:
             self.resolution_date = timezone.now()
+        
+        self.code = uuid.uuid4().hex[:8].upper() 
         super().save(*args, **kwargs)

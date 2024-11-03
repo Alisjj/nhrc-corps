@@ -89,19 +89,23 @@
                         <a
                                 href="{% url 'cases:add_case' %}"
                                 class="text-sm font-medium text-gray-700 hover:text-gray-800"
-                                >Report a Violation</a
-                            >
+                                >Report a Violation</a>
                         <a
                                 href="{% url 'cases:track_case' %}"
                                 class="text-sm font-medium text-gray-700 hover:text-gray-800"
                                 >Track Case</a
                             >
                         {% if user.is_authenticated %}
+                        <a
+                                href="{% url 'cases:cases_list' %}"
+                                class="text-sm font-medium text-gray-700 hover:text-gray-800"
+                                >View Cases</a>
                             <a
                                 href="{% url 'account_logout' %}"
                                 class="text-sm font-medium text-gray-700 hover:text-gray-800"
                                 >Sign Out</a
                             >
+                            
                             <span
                                 class="h-6 w-px bg-gray-200"
                                 aria-hidden="true"

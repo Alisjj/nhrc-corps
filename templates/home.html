@@ -10,12 +10,10 @@ Home {% endblock title %} {% block content %}
                     investigating violations, and ensuring justice for all Nigerians.
                 </p>
                 <div class="space-x-4">
-                    <a href="#" class="bg-white text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-100 inline-block">
+                    <a href="{% url 'cases:add_case' %}" class="bg-white text-indigo-600 px-6 py-3 rounded-lg hover:bg-indigo-100 inline-block">
                         Report a Violation
                     </a>
-                    <a href="#" class="bg-transparent border-2 border-white px-6 py-3 rounded-lg hover:bg-white hover:text-indigo-600 inline-block">
-                        Learn More
-                    </a>
+                    
                 </div>
             </div>
         </section>
@@ -27,22 +25,22 @@ Home {% endblock title %} {% block content %}
                     <svg class="w-16 h-16 mx-auto mb-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    <h4 class="text-2xl font-bold text-indigo-800 mb-2">256</h4>
+                    <h4 class="text-2xl font-bold text-indigo-800 mb-2">{{ resolved_cases}}</h4>
                     <p class="text-gray-600">Cases Resolved</p>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg p-6 text-center">
                     <svg class="w-16 h-16 mx-auto mb-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.768-.231-1.48-.632-2.08M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.768.231-1.48.632-2.08M14 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
                     </svg>
-                    <h4 class="text-2xl font-bold text-indigo-800 mb-2">42</h4>
+                    <h4 class="text-2xl font-bold text-indigo-800 mb-2">{{ active_cases }}</h4>
                     <p class="text-gray-600">Active Investigations</p>
                 </div>
                 <div class="bg-white rounded-lg shadow-lg p-6 text-center">
                     <svg class="w-16 h-16 mx-auto mb-4 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
                     </svg>
-                    <h4 class="text-2xl font-bold text-indigo-800 mb-2">178</h4>
-                    <p class="text-gray-600">Policy Recommendations</p>
+                    <h4 class="text-2xl font-bold text-indigo-800 mb-2">{{pending_cases}}</h4>
+                    <p class="text-gray-600">Pending Cases</p>
                 </div>
             </div>
         </section>
@@ -135,24 +133,9 @@ Home {% endblock title %} {% block content %}
     </main>
 
     <footer class="bg-indigo-800 text-white py-12">
-        <div class="container mx-auto px-6 grid md:grid-cols-3 gap-8">
-            <div>
-                <h4 class="text-xl font-bold mb-4">Contact Us</h4>
-                <p>Plot 9, Maroko Close, Off Ligali Ayorinde Street</p>
-                <p>Victoria Island, Lagos</p>
-                <p>Phone: +234 (0) 1 234 5678</p>
-                <p>Email: info@nhrc.gov.ng</p>
-            </div>
-            <div>
-                <h4 class="text-xl font-bold mb-4">Quick Links</h4>
-                <ul class="space-y-2">
-                    <li><a href="#" class="hover:text-indigo-200">About Us</a></li>
-                    <li><a href="#" class="hover:text-indigo-200">Case Tracking</a></li>
-                    <li><a href="#" class="hover:text-indigo-200">Resources</a></li>
-                    <li><a href="#" class="hover:text-indigo-200">Annual Reports</a></li>
-                </ul>
-            </div>
-        </div>
+        <div class="container mx-auto py-4 text-center text-white">
+            © 2024 National Human Rights Commission of Nigeria. All rights reserved.
+        </div>    
     </footer>
     </main>
 
